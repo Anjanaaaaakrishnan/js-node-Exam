@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+    <style>
+        ul{list-style-type: none;}
+        li{margin: 5px;}
+        .complete{color: green;}
+
+    </style>
+</head>
+
+<body>
+  Task Name:
+    <input type="text" id="taskname"><br>
+    Subject:
+    <input type="text" id="subject"><br>
+    Due Date:
+    <input type="date" id="date"><br>
+    Status:
+    <input type="text" id="status">
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="tasklist"></ul>
+
+    <script>
+        function addTask() {
+            let taskname = document.getElementById("taskname").value;
+            let subject = document.getElementById("subject").value;
+            let date = document.getElementById("date").value;
+            let status = document.getElementById("status").value;
+            let ul = document.getElementById("tasklist");
+
+            if (taskname=="") {
+                alert("Enter a valid task name");
+                return;
+            }
+
+            let li = document.createElement("li");
+            li.innerText = `Task: ${taskname} | Subject: ${subject} | Due: ${date} | Status: ${status} `;
+        
+
+
+
+            let editbtn = document.createElement("button");
+            editbtn.innerText = "Edit";
+            editbtn.onclick = function () {
+                let newtask = prompt("Edit task name:", taskname);
+                
+                if (newtask) {
+                    taskname = newtask;
+                    li.firstChild.nodeValue = `Task: ${taskname} | Subject: ${subject} | Due: ${date} | Status: ${status} `;
+                }
+            };
+
+            
+            let removebtn = document.createElement("button");
+            removebtn.innerText = "Remove";
+            removebtn.onclick = function () {
+                ul.removeChild(li);
+            };
+
+
+            let compltbtn=document.createElement("button");
+            compltbtn.innerText="Complete";
+            compltbtn.onclick=function(){
+                ul.compltbtn(li);
+            }
+
+             li.appendChild(editbtn);
+            li.appendChild(removebtn);
+            li.appendChild(compltbtn);
+            ul.appendChild(li);
+
+            
+            
+        }
+    </script>
+
+</body>
+
+</html>
